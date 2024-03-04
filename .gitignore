@@ -27,7 +27,6 @@ yarn-error.log*
 
 # local env files
 .env*.local
-.env
 
 # vercel
 .vercel
@@ -41,3 +40,6 @@ next-env.d.ts
 
 # sqlite
 *.db
+
+# python
+__pycache__
