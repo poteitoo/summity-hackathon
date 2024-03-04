@@ -14,6 +14,7 @@ black = "^24.2.0"
 google-api-python-client = "^2.120.0"
 yt-dlp = "^2023.12.30"
 replicate = "^0.24.0"
+isort = "^5.13.2"
 
 
 [build-system]

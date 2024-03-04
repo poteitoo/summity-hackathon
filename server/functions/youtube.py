@@ -1,5 +1,6 @@
-from yt_dlp import YoutubeDL
 import json
+
+from yt_dlp import YoutubeDL
 
 
 def shorter_than_one_hour(info, *, incomplete):

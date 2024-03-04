@@ -1,10 +1,11 @@
-from fastapi import FastAPI
-from prisma import Prisma
 from contextlib import asynccontextmanager
-from functions.youtube import get_youtube_video_info, download_youtube_video
-from fastapi import Request
+
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
+
+from functions.youtube import download_youtube_video, get_youtube_video_info
+from prisma import Prisma
 
 prisma = Prisma()
 
