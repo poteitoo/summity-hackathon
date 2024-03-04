@@ -8,9 +8,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum DownloadStatus {
+  PENDING
+  DOWNLOADING
+  DOWNLOADED
+  FAILED
+}
+
 model Message {
   id        String   @id @default(uuid())
   text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Video {
+  id              String          @id @default(uuid())
+  title           String?
+  description     String?
+  thumbnail       String?
+  tags            String[]        @default([])
+  category        String?
+  language        String?
+  duration        Int?
+  is_embedable    Boolean?        @default(false)
+  is_public       Boolean?        @default(false)
+  video_id        String          @unique
+  download_status DownloadStatus? @default(PENDING)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 }
