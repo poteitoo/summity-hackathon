@@ -1,11 +1,8 @@
-from contextlib import asynccontextmanager
-
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from server.functions.youtube import download_youtube_video, get_youtube_video_info
-from server.libs.prisma_client import lifespan, prisma
+from server.libs.prisma_client import lifespan
 from server.youtube import router as youtube_router
 
 
