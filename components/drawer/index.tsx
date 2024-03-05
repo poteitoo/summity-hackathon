@@ -1,14 +1,16 @@
 import { PropsWithChildren } from "react";
+import { ActiveLinkByLocation } from "./active-link-by-location";
+import { ClickToCloseDrawerLi } from "./click-to-close-drawer";
 
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
-    <div className="drawer">
-      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+    <div className="drawer h-screen">
+      <input id="left-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center p-3">
         <div className="navbar rounded-md border">
           <div className="flex-none lg:hidden">
             <label
-              htmlFor="my-drawer-3"
+              htmlFor="left-drawer"
               aria-label="open sidebar"
               className="btn btn-square btn-ghost"
             >
@@ -32,7 +34,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
               <li>
-                <a>Navbar Item 1</a>
+                <a>ホーム</a>
               </li>
               <li>
                 <a>Navbar Item 2</a>
@@ -44,18 +46,18 @@ export const Drawer = ({ children }: PropsWithChildren) => {
       </div>
       <div className="drawer-side">
         <label
-          htmlFor="my-drawer-3"
+          htmlFor="left-drawer"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
         <ul className="menu min-h-full w-4/5 max-w-64 rounded-md bg-slate-200 p-4">
           {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          <ClickToCloseDrawerLi>
+            <ActiveLinkByLocation href="/">ホーム</ActiveLinkByLocation>
+          </ClickToCloseDrawerLi>
+          <ClickToCloseDrawerLi>
+            <ActiveLinkByLocation href="/videos">動画一覧</ActiveLinkByLocation>
+          </ClickToCloseDrawerLi>
         </ul>
       </div>
     </div>
