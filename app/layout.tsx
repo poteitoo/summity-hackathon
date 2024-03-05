@@ -1,3 +1,4 @@
+import { NextAuthProvider } from "@/components/nextauth";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        {children}
+        <NextAuthProvider>{children}</NextAuthProvider>
         <Toaster />
       </body>
     </html>

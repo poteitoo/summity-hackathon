@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,6 +31,7 @@ type Props = {
 };
 
 export function SearchForm({ onSubmit }: Props) {
+  const { status } = useSession();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -52,11 +54,11 @@ export function SearchForm({ onSubmit }: Props) {
           </div>
         ),
       });
-      const res = await onSubmit(data.url)
+      const res = await onSubmit(data.url);
       if (res.error) {
         throw new Error(res.message);
       }
-      loadingToastId.dismiss()
+      loadingToastId.dismiss();
       toast({
         title: "リクエストを受け付けました",
       });
@@ -68,11 +70,13 @@ export function SearchForm({ onSubmit }: Props) {
       toast({
         title: "リクエストに失敗しました",
         description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <pre className="rounded-md py-4">
             {error instanceof Error ? (
-              <code className="text-white">{error.message}</code>
+              <code className="font-semibold text-white">{error.message}</code>
             ) : (
-              <code className="text-white">不明なエラーが発生しました</code>
+              <code className="font-semibold text-white">
+                不明なエラーが発生しました
+              </code>
             )}
           </pre>
         ),
@@ -115,6 +119,9 @@ export function SearchForm({ onSubmit }: Props) {
           <Button type="submit">送信する</Button>
         </div>
       </form>
+      {status === "authenticated" ? <p>ログイン中</p> : <p>ログアウト中</p>}
+      <Button onClick={() => signIn("github")}>Sign in with GitHub</Button>
+      <Button onClick={() => signOut()}>signout</Button>
     </Form>
   );
 }
