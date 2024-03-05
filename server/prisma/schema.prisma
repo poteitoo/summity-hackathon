@@ -15,13 +15,6 @@ enum DownloadStatus {
   FAILED
 }
 
-model Message {
-  id        String   @id @default(uuid())
-  text      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Video {
   id              String          @id @default(uuid())
   title           String?
@@ -30,6 +23,7 @@ model Video {
   tags            String[]        @default([])
   category        String?
   language        String?
+  extension       String?
   duration        Int?
   is_embedable    Boolean?        @default(false)
   is_public       Boolean?        @default(false)
@@ -37,4 +31,16 @@ model Video {
   download_status DownloadStatus? @default(PENDING)
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
+  user            User?           @relation(fields: [user_id], references: [id])
+  user_id         String?
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  videos    Video[]
 }
