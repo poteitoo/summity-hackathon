@@ -8,7 +8,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
       <input id="left-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center p-3">
         <div className="navbar rounded-md border">
-          <div className="flex-none lg:hidden">
+          <div className="flex-none md:hidden">
             <label
               htmlFor="left-drawer"
               aria-label="open sidebar"
@@ -29,15 +29,16 @@ export const Drawer = ({ children }: PropsWithChildren) => {
               </svg>
             </label>
           </div>
-          <div className="mx-2 flex-1 px-2">Navbar Title</div>
-          <div className="hidden flex-none lg:block">
-            <ul className="menu menu-horizontal">
-              {/* Navbar menu content here */}
+          <div className="mx-2 flex-1 px-2">summity.io</div>
+          <div className="hidden flex-none md:block">
+            <ul className="menu menu-horizontal gap-5">
               <li>
-                <a>ホーム</a>
+                <ActiveLinkByLocation href="/home">ホーム</ActiveLinkByLocation>
               </li>
               <li>
-                <a>Navbar Item 2</a>
+                <ActiveLinkByLocation href="/videos">
+                  動画一覧
+                </ActiveLinkByLocation>
               </li>
             </ul>
           </div>
@@ -53,7 +54,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
         <ul className="menu min-h-full w-4/5 max-w-64 rounded-md bg-slate-200 p-4">
           {/* Sidebar content here */}
           <ClickToCloseDrawerLi>
-            <ActiveLinkByLocation href="/">ホーム</ActiveLinkByLocation>
+            <ActiveLinkByLocation href="/home">ホーム</ActiveLinkByLocation>
           </ClickToCloseDrawerLi>
           <ClickToCloseDrawerLi>
             <ActiveLinkByLocation href="/videos">動画一覧</ActiveLinkByLocation>

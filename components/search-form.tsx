@@ -7,8 +7,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -82,7 +81,6 @@ export function SearchForm({ onSubmit }: Props) {
           name="url"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>URL</FormLabel>
               <FormControl>
                 <Input
                   placeholder="https://www.youtube.com/watch?v=XXXX"
@@ -90,7 +88,7 @@ export function SearchForm({ onSubmit }: Props) {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>youtubeのURLを入力してください</FormDescription>
+              <FormDescription>*youtubeのURLを入力してください</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -103,7 +101,7 @@ export function SearchForm({ onSubmit }: Props) {
           >
             ペーストする
           </Button>
-          <Button type="submit">書き起こしをリクエストする</Button>
+          <Button type="submit">送信する</Button>
         </div>
       </form>
     </Form>
