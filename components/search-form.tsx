@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,13 +44,23 @@ export function SearchForm({ onSubmit }: Props) {
 
   async function _onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const res = await onSubmit(data.url);
+      const loadingToastId = toast({
+        description: (
+          <div className="flex gap-3">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            <p>ローディング中</p>
+          </div>
+        ),
+      });
+      const res = await onSubmit(data.url)
       if (res.error) {
         throw new Error(res.message);
       }
+      loadingToastId.dismiss()
       toast({
         title: "リクエストを受け付けました",
       });
+      form.reset();
     } catch (error: unknown) {
       if (!(error instanceof Error)) {
         return;
