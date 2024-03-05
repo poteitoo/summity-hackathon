@@ -10,12 +10,12 @@ def get_youtube_video_info(video_url: str):
             raise ValueError("Not found")
 
 
-def checkIfIsAvailableVideoA(info, _, __):
+def checkIfIsAvailableVideoA(info, *, incomplete):
     duration = info.get("duration")
     if duration is None:  # ライブストリームなどdurationがわからない場合
         raise SystemError("Video duration is unknown")
     if duration > 120 * 60:  # 120 minutes までの動画を取得可能
-        raise SystemError("Video longer than 10 minutes")
+        raise SystemError("Video longer than 120 minutes")
 
 
 ydl_opts = {

@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 
 class YoutubeUpsertSchema(BaseModel):
+    user_id: str
     video_id: str
     title: str | None
     duration: int | None
@@ -14,4 +15,10 @@ class YoutubeUpsertSchema(BaseModel):
     language: str | None
     category: str | None
     is_public: bool | None
+    extension: str | None
     download_status: str | None
+
+
+class PostYoutubeDownloadRequestSchema(BaseModel):
+    user_id: str
+    video_id: str

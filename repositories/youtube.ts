@@ -18,9 +18,9 @@ export const getYTVideoInfoFromDB = async (video_id: string) =>
       return GetYTVideoInfoFromDBSchema.parse(res.data);
     });
 
-export const postYTVideoDownload = async (video_id: string) =>
+export const postYTVideoDownload = async (video_id: string, user_id: string) =>
   summity()
-    .post(`/youtube/${video_id}`, {})
+    .post(`/youtube`, { video_id, user_id })
     .then((res) => {
       return PostYTVideoDownload.parse(res.data);
     });
