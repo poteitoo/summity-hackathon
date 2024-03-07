@@ -37,6 +37,7 @@ next-env.d.ts
 
 # media files
 *.webm
+audios/
 
 # sqlite
 *.db
