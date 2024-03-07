@@ -35,6 +35,7 @@ async def bgt_download_youtube_video_and_register(video_id: str, user_id: str):
             "category": categories[0] if len(categories) > 0 else None,
             "is_public": video_info.get("availability") == "public",
             "download_status": "DOWNLOADED",
+            "transcribing_status": "TRANSCRIBING",
             "user_id": user_id,
         }
         await youtube_upsert(info)
@@ -52,10 +53,23 @@ async def bgt_download_youtube_video_and_register(video_id: str, user_id: str):
 
         res = await register_transcription(replicate_response, video_id)
         print("register_transcription", res.id)
+        await youtube_upsert(
+            {
+                "video_id": video_id,
+                "transcribing_status": "TRANSCRIBED",
+                "num_speakers": replicate_response.num_speakers,
+            }
+        )
 
         remove_audio(audio_file_path)
         print("audio file removed")
     except Exception as e:
         print(video_id, e)
-        await youtube_upsert({"video_id": video_id, "download_status": "FAILED"})
+        await youtube_upsert(
+            {
+                "video_id": video_id,
+                "download_status": "FAILED",
+                "transcribing_status": "FAILED",
+            }
+        )
         raise ConnectionRefusedError("Failed to download video")

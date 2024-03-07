@@ -16,26 +16,34 @@ enum DownloadStatus {
   FAILED
 }
 
+enum TranscribingStatus {
+  PENDING
+  TRANSCRIBING
+  TRANSCRIBED
+  FAILED
+}
+
 model Video {
-  id              String                  @id @default(uuid())
-  title           String?
-  description     String?                 @db.LongText
-  thumbnail       String?
-  tags            String?                 @db.MediumText
-  category        String?
-  language        String?
-  extension       String?
-  duration        Int?
-  num_speakers    Int?
-  is_embedable    Boolean?                @default(false)
-  is_public       Boolean?                @default(false)
-  video_id        String                  @unique
-  download_status DownloadStatus?         @default(PENDING)
-  createdAt       DateTime                @default(now())
-  updatedAt       DateTime                @updatedAt
-  segments        Transcription_Segment[]
-  user_id         String?
-  user            User?                   @relation(fields: [user_id], references: [id])
+  id                  String                  @id @default(uuid())
+  title               String?
+  description         String?                 @db.LongText
+  thumbnail           String?
+  tags                String?                 @db.MediumText
+  category            String?
+  language            String?
+  extension           String?
+  duration            Int?
+  num_speakers        Int?                    @default(1)
+  is_embedable        Boolean?                @default(false)
+  is_public           Boolean?                @default(false)
+  video_id            String                  @unique
+  download_status     DownloadStatus?         @default(PENDING)
+  transcribing_status TranscribingStatus?     @default(PENDING)
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @updatedAt
+  segments            Transcription_Segment[]
+  user_id             String?
+  user                User?                   @relation(fields: [user_id], references: [id])
 
   @@index([user_id])
 }

@@ -15,6 +15,8 @@ class YoutubeUpsertSchema(BaseModel):
     is_public: bool | None
     extension: str | None
     download_status: str | None
+    num_speakers: int | None
+    transcribing_status: str | None
 
 
 class PostYoutubeDownloadRequestSchema(BaseModel):
