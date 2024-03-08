@@ -10,10 +10,10 @@ def get_transcription(base64_audio: str, title: str, language: str):
         input={
             "file_string": base64_audio,
             "prompt": f"you are transcribing youtube video. title:{title}",
-            "group_segments": True,
+            "group_segments": False,
             "offset_seconds": 0,
             "language": language,
-            "transcript_output_format": "both",
+            "transcript_output_format": "segments_only",
         },
     )
     return output
@@ -23,27 +23,18 @@ async def register_transcription(
     transcriptions: ReplicateResponseSchema,
     video_id: str,
 ):
-    for segment_index, segment in enumerate(transcriptions.segments):
-        print("segment_index", segment_index)
-        output = await prisma.transcription_segment.create(
-            data={
+    output = await prisma.transcription_segment.create_many(
+        data=[
+            {
                 "end": str(segment.end),
                 "start": str(segment.start),
                 "text": segment.text,
                 "speaker": segment.speaker,
                 "index": segment_index,
                 "video_id": video_id,
-                "words": {
-                    "create": [
-                        {
-                            "end": word.end,
-                            "start": word.start,
-                            "word": word.word,
-                            "index": word_index,
-                        }
-                        for word_index, word in enumerate(segment.words)
-                    ],
-                },
             }
-        )
+            for segment_index, segment in enumerate(transcriptions.segments)
+        ],
+        skip_duplicates=True,
+    )
     return output

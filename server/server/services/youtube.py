@@ -52,7 +52,7 @@ async def bgt_download_youtube_video_and_register(video_id: str, user_id: str):
         replicate_response = ReplicateResponseSchema.model_validate_json(dumps)
 
         res = await register_transcription(replicate_response, video_id)
-        print("register_transcription", res.id)
+        print("register_transcription", res)
         await youtube_upsert(
             {
                 "video_id": video_id,
@@ -64,7 +64,7 @@ async def bgt_download_youtube_video_and_register(video_id: str, user_id: str):
         remove_audio(audio_file_path)
         print("audio file removed")
     except Exception as e:
-        print(video_id, e)
+        print("bgt_download_youtube_video_and_register", video_id, e)
         await youtube_upsert(
             {
                 "video_id": video_id,

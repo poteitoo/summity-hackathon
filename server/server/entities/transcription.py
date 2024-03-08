@@ -16,7 +16,6 @@ class Segment(BaseModel):
     start: float | str
     text: str
     speaker: str
-    words: List[Word]
 
 
 class ReplicateResponseSchema(BaseModel):
