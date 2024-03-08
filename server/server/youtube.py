@@ -2,6 +2,9 @@ from fastapi import APIRouter, BackgroundTasks
 
 from .entities.youtube import PostYoutubeDownloadRequestSchema, YoutubeUpsertSchema
 from .functions.youtube import get_youtube_video_info
+from .repositories.user import (
+    count_videos_by_user_id as user_count_videos_by_user_id,
+)
 from .repositories.youtube import find_first as youtube_find_first
 from .repositories.youtube import find_first_or_raise as youtube_find_first_or_raise
 from .services.youtube import bgt_download_youtube_video_and_register
@@ -24,6 +27,12 @@ async def download_youtube(
             return {"status": "already downloaded"}
         elif video.download_status != "FAILED":
             return {"status": "downloading"}
+    if transcription_count := await user_count_videos_by_user_id(
+        params.user_id
+    ):
+        print("transcription_count", transcription_count)
+        if transcription_count >= 5:
+            return {"status": "limit_reached"}
 
     bgts.add_task(
         bgt_download_youtube_video_and_register, params.video_id, params.user_id

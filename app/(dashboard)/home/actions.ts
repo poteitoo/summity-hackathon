@@ -43,7 +43,14 @@ export const requesthVideoTranscription = async (url: string) => {
     return { message: "有効なURLではありません", video_id: null, error: true };
   }
   try {
-    await postYTVideoDownload(video_id, userId);
+    const { status } = await postYTVideoDownload(video_id, userId);
+    if (status === "limit_reached") {
+      return {
+        message: `リクエスト回数の上限に達しました。`,
+        video_id,
+        error: true,
+      };
+    }
     return { message: `リクエストを受け付けました`, video_id, error: false };
   } catch (error: unknown) {
     return { message: `リクエストに失敗しました`, video_id, error: true };
