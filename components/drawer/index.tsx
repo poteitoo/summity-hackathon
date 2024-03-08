@@ -1,13 +1,14 @@
 import { PropsWithChildren } from "react";
 import { ActiveLinkByLocation } from "./active-link-by-location";
 import { ClickToCloseDrawerLi } from "./click-to-close-drawer";
+import { NavbarWithFullscreen } from "./navbar-with-fullscreen";
 
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
     <div className="drawer h-screen">
       <input id="left-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center p-3">
-        <div className="navbar rounded-md border">
+        <NavbarWithFullscreen>
           <div className="flex-none md:hidden">
             <label
               htmlFor="left-drawer"
@@ -42,7 +43,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
               </li>
             </ul>
           </div>
-        </div>
+        </NavbarWithFullscreen>
         {children}
       </div>
       <div className="drawer-side">
@@ -52,7 +53,6 @@ export const Drawer = ({ children }: PropsWithChildren) => {
           className="drawer-overlay"
         ></label>
         <ul className="menu min-h-full w-4/5 max-w-64 rounded-md bg-slate-200 p-4">
-          {/* Sidebar content here */}
           <ClickToCloseDrawerLi>
             <ActiveLinkByLocation href="/home">ホーム</ActiveLinkByLocation>
           </ClickToCloseDrawerLi>
