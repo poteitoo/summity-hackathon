@@ -14,7 +14,7 @@ def checkIfIsAvailableVideoA(info, *, incomplete):
     duration = info.get("duration")
     if duration is None:  # ライブストリームなどdurationがわからない場合
         raise SystemError("Video duration is unknown")
-    if duration > 120 * 60:  # 120 minutes までの動画を取得可能
+    if duration > 20 * 60:  # 20 minutes までの動画を取得可能
         raise SystemError("Video longer than 120 minutes")
 
 
