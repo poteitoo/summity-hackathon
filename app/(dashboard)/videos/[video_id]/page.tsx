@@ -1,5 +1,6 @@
 "use client";
 
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { useFullscreen } from "@/hooks/use-fullscreen";
 import { getVideoById } from "@/repositories/video";
@@ -43,18 +44,18 @@ export default function Page() {
 
   return (
     <div className="relative flex h-full w-full flex-col items-center gap-3">
-      <div className="fixed grid h-full w-full grid-cols-2 gap-3 p-3">
-        <div className="h-full w-full">
+      <div className="fixed grid h-full w-full gap-3 p-3 md:grid-cols-2">
+        <AspectRatio ratio={16 / 9} className="bg-muted">
           <YouTube
             videoId={video_id}
             className="h-full w-full"
             iframeClassName="h-full w-full"
             onReady={handleYoutubeReady}
           />
-        </div>
+        </AspectRatio>
         <div
           data-fullscreen={isFullscreen}
-          className="row-span-2 h-[calc(100vh-64px)] w-full overflow-auto pb-32 data-[fullscreen=false]:h-[calc(100vh-100px)]"
+          className="row-span-2 h-[calc(100vh-324px)] w-full overflow-auto pb-32 md:h-[calc(100vh-64px)] data-[fullscreen=false]:md:h-[calc(100vh-100px)]"
         >
           <div className="flex flex-col gap-5">
             {video.segments?.map((segment) => (
@@ -88,7 +89,7 @@ export default function Page() {
           </div>
         </div>
         <div className="h-full w-full">
-          <Button className="btn" onClick={handleFullscreenChange}>
+          <Button className="hidden md:block" onClick={handleFullscreenChange}>
             {isFullscreen ? "フルスクリーンを解除" : "フルスクリーンへ"}
           </Button>
         </div>

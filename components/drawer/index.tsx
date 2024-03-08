@@ -33,7 +33,9 @@ export const Drawer = ({ children }: PropsWithChildren) => {
             </label>
           </div>
           <div className="mx-2 flex-1 px-2">summity.io</div>
-          <ToggleSignInAndSignUp />
+          <div className="md:hidden">
+            <ToggleSignInAndSignUp />
+          </div>
           <div className="hidden flex-none md:block">
             <ul className="menu menu-horizontal gap-5">
               <li>
@@ -57,7 +59,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu min-h-full w-4/5 max-w-64 gap-5 rounded-md bg-slate-200 p-4">
+        <ul className="menu min-h-full w-4/5 max-w-64 gap-3 rounded-md bg-slate-200 p-4">
           <ClickToCloseDrawerLi>
             <ActiveLinkByLocation href="/home">ホーム</ActiveLinkByLocation>
           </ClickToCloseDrawerLi>
