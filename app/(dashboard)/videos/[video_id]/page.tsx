@@ -88,9 +88,20 @@ export default function Page() {
             ))}
           </div>
         </div>
-        <div className="h-full w-full">
-          <Button className="hidden md:block" onClick={handleFullscreenChange}>
+        <div className="flex h-full w-full gap-3 justify-end">
+          <Button
+            className="hidden md:block"
+            onClick={handleFullscreenChange}
+            variant="secondary"
+          >
             {isFullscreen ? "フルスクリーンを解除" : "フルスクリーンへ"}
+          </Button>
+          <Button
+            className="hidden md:block"
+            onClick={() => console.log("質問作成")}
+            variant="secondary"
+          >
+            質問を作成
           </Button>
         </div>
       </div>
