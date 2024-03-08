@@ -89,7 +89,7 @@ export default function Page() {
         </div>
         <div className="h-full w-full">
           <Button className="btn" onClick={handleFullscreenChange}>
-            {isFullscreen ? "exitFullscreen" : "fullscreen"}
+            {isFullscreen ? "フルスクリーンを解除" : "フルスクリーンへ"}
           </Button>
         </div>
       </div>

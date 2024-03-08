@@ -2,6 +2,8 @@ import { PropsWithChildren } from "react";
 import { ActiveLinkByLocation } from "./active-link-by-location";
 import { ClickToCloseDrawerLi } from "./click-to-close-drawer";
 import { NavbarWithFullscreen } from "./navbar-with-fullscreen";
+import { SignInUserAvatar } from "./signin-user-avatar";
+import { ToggleSignInAndSignUp } from "./toggle-signin-and-signout";
 
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
@@ -31,6 +33,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
             </label>
           </div>
           <div className="mx-2 flex-1 px-2">summity.io</div>
+          <ToggleSignInAndSignUp />
           <div className="hidden flex-none md:block">
             <ul className="menu menu-horizontal gap-5">
               <li>
@@ -41,6 +44,8 @@ export const Drawer = ({ children }: PropsWithChildren) => {
                   動画一覧
                 </ActiveLinkByLocation>
               </li>
+              <ToggleSignInAndSignUp />
+              <SignInUserAvatar />
             </ul>
           </div>
         </NavbarWithFullscreen>
@@ -52,7 +57,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu min-h-full w-4/5 max-w-64 rounded-md bg-slate-200 p-4">
+        <ul className="menu min-h-full w-4/5 max-w-64 gap-5 rounded-md bg-slate-200 p-4">
           <ClickToCloseDrawerLi>
             <ActiveLinkByLocation href="/home">ホーム</ActiveLinkByLocation>
           </ClickToCloseDrawerLi>

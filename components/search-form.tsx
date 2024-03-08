@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -31,7 +30,6 @@ type Props = {
 };
 
 export function SearchForm({ onSubmit }: Props) {
-  const { status } = useSession();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -119,9 +117,6 @@ export function SearchForm({ onSubmit }: Props) {
           <Button type="submit">送信する</Button>
         </div>
       </form>
-      {status === "authenticated" ? <p>ログイン中</p> : <p>ログアウト中</p>}
-      <Button onClick={() => signIn("github")}>Sign in with GitHub</Button>
-      <Button onClick={() => signOut()}>signout</Button>
     </Form>
   );
 }
