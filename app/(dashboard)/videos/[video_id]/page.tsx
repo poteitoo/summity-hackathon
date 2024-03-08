@@ -57,21 +57,28 @@ export default function Page() {
           className="row-span-2 h-[calc(100vh-64px)] w-full overflow-auto pb-32 data-[fullscreen=false]:h-[calc(100vh-100px)]"
         >
           <div className="flex flex-col gap-5">
-            {video.segments?.map((segment, i) => (
+            {video.segments?.map((segment) => (
               <div key={segment.id} className="">
                 <Button
                   variant="link"
                   data-start={segment.start}
                   data-end={segment.end}
                   onClick={() => seekTo(segment.start)}
+                  data-active={
+                    parseFloat(segment.start) <= currentTime &&
+                    parseFloat(segment.end) >= currentTime
+                  }
+                  className="data-[active=true]:font-bold data-[active=true]:text-green-600"
                 >
                   {segment.speaker}
                 </Button>
                 <section className="flex gap-3">
                   <p
-                    className="prose flex-1"
-                    data-start={segment.start}
-                    data-end={segment.end}
+                    className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
+                    data-active={
+                      parseFloat(segment.start) <= currentTime &&
+                      parseFloat(segment.end) >= currentTime
+                    }
                   >
                     {segment.text}
                   </p>
