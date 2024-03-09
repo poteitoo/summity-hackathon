@@ -58,7 +58,7 @@ export default function Page() {
           className="row-span-2 h-[calc(100vh-324px)] w-full overflow-auto pb-32 md:h-[calc(100vh-64px)] data-[fullscreen=false]:md:h-[calc(100vh-100px)]"
         >
           <div className="flex flex-col gap-5">
-            {video.segments?.map((segment) => (
+            {video.segments?.map((segment, i) => (
               <div key={segment.id} className="">
                 <Button
                   variant="link"
@@ -74,7 +74,7 @@ export default function Page() {
                   {segment.speaker}
                 </Button>
                 <section className="flex gap-3">
-                  <p
+                <p
                     className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
                     data-active={
                       parseFloat(segment.start) <= currentTime &&
@@ -82,13 +82,21 @@ export default function Page() {
                     }
                   >
                     {segment.text}
+                  </p><p
+                    className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
+                    data-active={
+                      parseFloat(segment.start) <= currentTime &&
+                      parseFloat(segment.end) >= currentTime
+                    }
+                  >
+                    {video.translations?.[i]?.text}
                   </p>
                 </section>
               </div>
             ))}
           </div>
         </div>
-        <div className="flex h-full w-full gap-3 justify-end">
+        <div className="flex h-full w-full justify-end gap-3">
           <Button
             className="hidden md:block"
             onClick={handleFullscreenChange}

@@ -10,6 +10,14 @@ export const SegmentOriginalSchema = z.object({
 });
 export type SegmentOriginalSchemaType = z.infer<typeof SegmentOriginalSchema>;
 
+export const TranslationOriginalSchema = z.object({
+  id: z.string(),
+  index: z.number().int(),
+  text: z.string(),
+  language: z.string(),
+  video_id: z.string(),
+})
+
 export const VideoOrignalSchema = z.object({
   id: z.string(),
   video_id: z.string(),
@@ -57,6 +65,7 @@ export const GetVideoResponseSchema = z.object({
   updatedAt: z.coerce.date(),
   user_id: z.string().nullish(),
   segments: z.array(SegmentOriginalSchema).optional(),
+  translations: z.array(TranslationOriginalSchema).optional(),
 });
 export type GetVideoResponseSchemaType = z.infer<typeof GetVideoResponseSchema>;
 
