@@ -16,6 +16,7 @@ yt-dlp = "^2023.12.30"
 replicate = "^0.24.0"
 isort = "^5.13.2"
 gunicorn = "^21.2.0"
+google-cloud-translate = "^3.15.3"
 
 
 [build-system]

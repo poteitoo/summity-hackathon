@@ -7,6 +7,7 @@ RUN apt update && \
         gnupg \
         lsb-release \
         && rm -rf /var/lib/apt/lists/*
+RUN pip install poetry
 
 # Node.js v20のインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
@@ -18,7 +19,7 @@ FROM base
 WORKDIR /app
 
 COPY . ./
-RUN ls -al
+RUN poetry export -f requirements.txt -o requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install -U prisma && npm i -g prisma && prisma generate
 
