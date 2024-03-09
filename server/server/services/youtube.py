@@ -3,7 +3,9 @@ import json
 from ..entities.transcription import ReplicateResponseSchema
 from ..entities.youtube import YoutubeUpsertSchema
 from ..functions.transcription import convert_to_base64_from_audio_file, remove_audio
+from ..functions.translate import translate_text
 from ..functions.youtube import download_youtube_video
+from ..repositories.translation import create_translation_to_segments
 from ..repositories.youtube import upsert as youtube_upsert
 from ..services.transcription import register_transcription
 from .transcription import get_transcription
@@ -60,6 +62,16 @@ async def bgt_download_youtube_video_and_register(video_id: str, user_id: str):
                 "num_speakers": replicate_response.num_speakers,
             }
         )
+        translated_texts = translate_text(
+            [seg.text for seg in replicate_response.segments],
+            info["language"],
+            "ja",
+        )
+        res = await create_translation_to_segments(
+            [(i, t.translated_text) for i, t in enumerate(translated_texts)],
+            video_id,
+        )
+        print("create_translation_to_segments", res)
 
         remove_audio(audio_file_path)
         print("audio file removed")

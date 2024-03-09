@@ -24,26 +24,27 @@ enum TranscribingStatus {
 }
 
 model Video {
-  id                  String                  @id @default(uuid())
+  id                  String                      @id @default(uuid())
   title               String?
-  description         String?                 @db.LongText
+  description         String?                     @db.LongText
   thumbnail           String?
-  tags                String?                 @db.MediumText
+  tags                String?                     @db.MediumText
   category            String?
   language            String?
   extension           String?
   duration            Int?
-  num_speakers        Int?                    @default(1)
-  is_embedable        Boolean?                @default(false)
-  is_public           Boolean?                @default(false)
-  video_id            String                  @unique
-  download_status     DownloadStatus?         @default(PENDING)
-  transcribing_status TranscribingStatus?     @default(PENDING)
-  createdAt           DateTime                @default(now())
-  updatedAt           DateTime                @updatedAt
+  num_speakers        Int?                        @default(1)
+  is_embedable        Boolean?                    @default(false)
+  is_public           Boolean?                    @default(false)
+  video_id            String                      @unique
+  download_status     DownloadStatus?             @default(PENDING)
+  transcribing_status TranscribingStatus?         @default(PENDING)
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
   segments            Transcription_Segment[]
   user_id             String?
-  user                User?                   @relation(fields: [user_id], references: [id])
+  user                User?                       @relation(fields: [user_id], references: [id])
+  translations        Transcription_Translation[]
 
   @@index([user_id])
 }
@@ -82,4 +83,16 @@ model Transcription_Word {
   transcription_segment_id String?
 
   @@index([transcription_segment_id])
+}
+
+model Transcription_Translation {
+  id       String @id @default(uuid())
+  index    Int
+  text     String @db.LongText
+  language String
+  video    Video  @relation(fields: [video_id], references: [video_id])
+  video_id String
+
+  @@unique([video_id, language, index])
+  @@index([video_id])
 }
