@@ -24,7 +24,7 @@ class InternalServerErrorMiddleware(BaseHTTPMiddleware):
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://summity-hackathon.vercel.app"],
+    allow_origins=["https://summity.vercel.app"],
     # allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
