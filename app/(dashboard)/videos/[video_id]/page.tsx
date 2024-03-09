@@ -74,7 +74,7 @@ export default function Page() {
                   {segment.speaker}
                 </Button>
                 <section className="flex gap-3">
-                <p
+                  <p
                     className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
                     data-active={
                       parseFloat(segment.start) <= currentTime &&
@@ -82,7 +82,8 @@ export default function Page() {
                     }
                   >
                     {segment.text}
-                  </p><p
+                  </p>
+                  <p
                     className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
                     data-active={
                       parseFloat(segment.start) <= currentTime &&

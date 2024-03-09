@@ -8,8 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "summity.io - App",
-  description: "Youtube動画を自動で書き起こし、翻訳、クイズ作成まで行う外国語学習アプリです。",
-  icons:['/summity.jpg'],
+  description:
+    "Youtube動画を自動で書き起こし、翻訳、クイズ作成まで行う外国語学習アプリです。",
+  icons: ["/summity.jpg"],
 };
 
 export default function RootLayout({

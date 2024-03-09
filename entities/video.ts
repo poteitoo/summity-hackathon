@@ -16,7 +16,7 @@ export const TranslationOriginalSchema = z.object({
   text: z.string(),
   language: z.string(),
   video_id: z.string(),
-})
+});
 
 export const VideoOrignalSchema = z.object({
   id: z.string(),
