@@ -57,45 +57,51 @@ export default function Page() {
           data-fullscreen={isFullscreen}
           className="row-span-2 h-[calc(100vh-324px)] w-full overflow-auto pb-32 md:h-[calc(100vh-64px)] data-[fullscreen=false]:md:h-[calc(100vh-100px)]"
         >
-          <div className="flex flex-col gap-5">
-            {video.segments?.map((segment, i) => (
-              <div key={segment.id} className="">
-                <Button
-                  variant="link"
-                  data-start={segment.start}
-                  data-end={segment.end}
-                  onClick={() => seekTo(segment.start)}
-                  data-active={
-                    parseFloat(segment.start) <= currentTime &&
-                    parseFloat(segment.end) >= currentTime
-                  }
-                  className="data-[active=true]:font-bold data-[active=true]:text-green-600"
-                >
-                  {segment.speaker}
-                </Button>
-                <section className="flex gap-3">
-                  <p
-                    className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
+          {video.videos.segments ? (
+            <div className="flex flex-col gap-5">
+              {video.videos.segments.map((segment, i) => (
+                <div key={segment.id} className="">
+                  <Button
+                    variant="link"
+                    data-start={segment.start}
+                    data-end={segment.end}
+                    onClick={() => seekTo(segment.start)}
                     data-active={
                       parseFloat(segment.start) <= currentTime &&
                       parseFloat(segment.end) >= currentTime
                     }
+                    className="data-[active=true]:font-bold data-[active=true]:text-green-600"
                   >
-                    {segment.text}
-                  </p>
-                  <p
-                    className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
-                    data-active={
-                      parseFloat(segment.start) <= currentTime &&
-                      parseFloat(segment.end) >= currentTime
-                    }
-                  >
-                    {video.translations?.[i]?.text}
-                  </p>
-                </section>
-              </div>
-            ))}
-          </div>
+                    {segment.speaker}
+                  </Button>
+                  <section className="flex gap-3">
+                    <p
+                      className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
+                      data-active={
+                        parseFloat(segment.start) <= currentTime &&
+                        parseFloat(segment.end) >= currentTime
+                      }
+                    >
+                      {segment.text}
+                    </p>
+                    <p
+                      className="prose flex-1 data-[active=true]:font-bold data-[active=true]:text-green-600"
+                      data-active={
+                        parseFloat(segment.start) <= currentTime &&
+                        parseFloat(segment.end) >= currentTime
+                      }
+                    >
+                      {video.translations?.[i]?.text}
+                    </p>
+                  </section>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-3">
+              <div>Loading...</div>
+            </div>
+          )}
         </div>
         <div className="flex h-full w-full justify-end gap-3">
           <Button
