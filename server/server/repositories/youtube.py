@@ -11,10 +11,10 @@ async def find_first(video_id: str):
 
 
 async def upsert(video_info: YoutubeUpsertSchema):
+    print("upsert video_info", video_info)
     return await prisma.video.upsert(
-        data={
-            "create": video_info,
-            "update": video_info,
+        data={"create": video_info, "update": video_info},
+        where={
+            "video_id": video_info["video_id"],
         },
-        where={"video_id": video_info["video_id"]},
     )

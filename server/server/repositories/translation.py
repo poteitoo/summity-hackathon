@@ -6,7 +6,7 @@ from ..libs.prisma_client import prisma
 async def create_translation_to_segments(
     texts: List[Tuple[int, str]], video_id: str
 ) -> int:
-    return await prisma.transcription_translation.create_many(
+    return await prisma.translation.create_many(
         skip_duplicates=True,
         data=[
             {"language": "ja", "text": text, "video_id": video_id, "index": index}

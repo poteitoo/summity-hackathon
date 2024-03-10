@@ -1,22 +1,24 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class YoutubeUpsertSchema(BaseModel):
     user_id: str
     video_id: str
-    title: str | None
-    duration: int | None
-    thumbnail: str | None
-    description: str | None
-    is_embedable: bool | None
-    tags: str | None
-    language: str | None
-    category: str | None
-    is_public: bool | None
-    extension: str | None
-    download_status: str | None
-    num_speakers: int | None
-    transcribing_status: str | None
+    title: Optional[str]
+    duration: Optional[int]
+    thumbnail: Optional[str]
+    description: Optional[str]
+    is_embedable: Optional[bool]
+    tags: Optional[str]
+    language: Optional[str]
+    category: Optional[str]
+    is_public: Optional[bool]
+    extension: Optional[str]
+    download_status: Optional[str]
+    num_speakers: Optional[int]
+    transcribing_status: Optional[str]
 
 
 class PostYoutubeDownloadRequestSchema(BaseModel):

@@ -27,7 +27,7 @@ async def download_youtube(
             return {"status": "downloading"}
     if transcription_count := await user_count_videos_by_user_id(params.user_id):
         print("transcription_count", transcription_count)
-        if transcription_count > 3:
+        if transcription_count > 5:
             return {"status": "limit_reached"}
 
     bgts.add_task(

@@ -62,6 +62,7 @@ async def bgt_download_youtube_video_and_register(video_id: str, user_id: str):
                 "num_speakers": replicate_response.num_speakers,
             }
         )
+
         translated_texts = translate_text(
             [seg.text for seg in replicate_response.segments],
             info["language"],
