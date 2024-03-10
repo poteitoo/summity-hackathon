@@ -10,7 +10,9 @@ async def find_first_by_video_id_or_raise(video_id: str):
             },
         },
     )
-    translations = await prisma.translation.find_many(where={"video_id": video_id})
+    translations = await prisma.translation.find_many(
+        where={"video_id": video_id}, order={"index": "asc"}
+    )
     return {"videos": videos, "translations": translations}
 
 
