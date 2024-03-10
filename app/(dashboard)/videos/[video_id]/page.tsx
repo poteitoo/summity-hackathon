@@ -113,7 +113,7 @@ export default function Page() {
           </Button>
           <Button
             className="hidden md:block"
-            onClick={() => console.log("質問作成")}
+            onClick={() => alert("質問作成　実装中")}
             variant="secondary"
           >
             質問を作成
